@@ -29,45 +29,45 @@ let gameState = {
     }
   },
   computers: [
-  //   {
-  //   loc: {
-  //     x: 3,
-  //     y: 5,
-  //     direction: 'n'
-  //   },
-  //   points: [{
-  //     x: 3,
-  //     y: 1
-  //   },{
-  //     x: 2,
-  //     y: 1
-  //   },{
-  //     x: 2,
-  //     y: 18
-  //   },{
-  //     x: 3,
-  //     y: 18
-  //   }]
-  // },{
-  //   loc: {
-  //     x: 16,
-  //     y: 14,
-  //     direction: 's'
-  //   },
-  //   points: [{
-  //     x: 16,
-  //     y: 18
-  //   },{
-  //     x: 17,
-  //     y: 18
-  //   },{
-  //     x: 17,
-  //     y: 1
-  //   },{
-  //     x: 16,
-  //     y: 1
-  //   }]
-  // }
+    {
+    loc: {
+      x: 3,
+      y: 5,
+      direction: 'n'
+    },
+    points: [{
+      x: 3,
+      y: 1
+    },{
+      x: 2,
+      y: 1
+    },{
+      x: 2,
+      y: 18
+    },{
+      x: 3,
+      y: 18
+    }]
+  },{
+    loc: {
+      x: 16,
+      y: 14,
+      direction: 's'
+    },
+    points: [{
+      x: 16,
+      y: 18
+    },{
+      x: 17,
+      y: 18
+    },{
+      x: 17,
+      y: 1
+    },{
+      x: 16,
+      y: 1
+    }]
+  }
   ]
 }
 
@@ -82,11 +82,19 @@ let canvas,
 
 let setup = () => {
   canvas = document.getElementById("myCanvas");
-  img = {
-    e: document.getElementById('car-e'),
-    w: document.getElementById('car-w'),
-    n: document.getElementById('car-n'),
-    s: document.getElementById('car-s'),
+  images = {
+    player: {
+      e: document.getElementById('player-e'),
+      w: document.getElementById('player-w'),
+      n: document.getElementById('player-n'),
+      s: document.getElementById('player-s'),
+    },
+    computer: {
+      e: document.getElementById('computer-e'),
+      w: document.getElementById('computer-w'),
+      n: document.getElementById('computer-n'),
+      s: document.getElementById('computer-s'),
+    }
   }
   ctx = canvas.getContext("2d");
   document.onkeydown = controller;
@@ -127,6 +135,7 @@ let calculateMove = (player, loc) => {
 }
 
 let movePlayer = (player, move) => {
+  if(move.direction == '') return;
   let loc = Object.assign({}, player.loc);
 
   // up arrow
@@ -186,9 +195,17 @@ let willColide = (loc) => {
       width = map[0].length;
 
   try{
-    if(['n','s'].includes(loc.direction)){
+    if(loc.direction == 'n'){
       firstCord.y = Math.floor(y);
       secondCord.y = Math.floor(secondCord.y) + 1;
+    }
+    else if(loc.direction == 's'){
+      firstCord.y = Math.ceil(y) - 1;
+      secondCord.y = Math.ceil(secondCord.y);
+    }
+    else if(loc.direction == 'e'){
+      firstCord.x = Math.ceil(x) - 1;
+      secondCord.x = Math.ceil(secondCord.x);
     }
     else{
       firstCord.x = Math.floor(x);
@@ -240,7 +257,7 @@ let render = () => {
   //   });
   // });
 
-  let renderPlayer = (player, color = 'white') => {
+  let renderPlayer = (player, type) => {
     let { x, y, direction } = player.loc,
         height = scale,
         width = scale,
@@ -253,7 +270,7 @@ let render = () => {
     else
       width *= 2;
 
-    let selectedImg = img[direction];
+    let selectedImg = images[type][direction];
 
     // ctx.beginPath();
     // ctx.rect(scale*x, scale*y, scale, scale);
@@ -271,8 +288,8 @@ let render = () => {
 
   }
 
-  renderPlayer(player);
-  computers.forEach(renderPlayer);
+  renderPlayer(player, 'player');
+  computers.forEach((c) => renderPlayer(c, 'computer'));
 
 }
 

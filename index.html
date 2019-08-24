@@ -18,6 +18,14 @@
       canvas{
         border: 3px solid #fff;
       }
+
+      img {
+        -webkit-user-drag: none;
+        -khtml-user-drag: none;
+        -moz-user-drag: none;
+        -o-user-drag: none;
+        user-drag: none;
+      }
     </style>
   </head>
 
@@ -29,10 +37,14 @@
       <img style='position: absolute' width="500" height="500" src='./lot-overlay.png'/>
     </div>
 
-    <img id='car-e' style='display: none' src='./car-e.png'/>
-    <img id='car-w' style='display: none' src='./car-w.png'/>
-    <img id='car-n' style='display: none' src='./car-n.png'/>
-    <img id='car-s' style='display: none' src='./car-s.png'/>
+    <img id='player-e' style='display: none' src='./car-e.png'/>
+    <img id='player-w' style='display: none' src='./car-w.png'/>
+    <img id='player-n' style='display: none' src='./car-n.png'/>
+    <img id='player-s' style='display: none' src='./car-s.png'/>
+    <img id='computer-e' style='display: none' src='./computer-e.png'/>
+    <img id='computer-w' style='display: none' src='./computer-w.png'/>
+    <img id='computer-n' style='display: none' src='./computer-n.png'/>
+    <img id='computer-s' style='display: none' src='./computer-s.png'/>
 
     <script src='./main.js'></script>
   </body>
