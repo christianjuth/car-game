@@ -1,0 +1,39 @@
+<html>
+
+  <head>
+    <style>
+      body{
+        background-color: #2EA17A;
+        padding: 0;
+        margin: 0;
+      }
+
+      .gameWrap{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+
+      canvas{
+        border: 3px solid #fff;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class='gameWrap'>
+      <img style='position: absolute' width="500" height="500" src='./lot.png'/>
+      <canvas style='position: absolute' id="myCanvas" width="500" height="500"></canvas>
+      <img style='position: absolute' width="500" height="500" src='./lot-overlay.png'/>
+    </div>
+
+    <img id='car-e' style='display: none' src='./car-e.png'/>
+    <img id='car-w' style='display: none' src='./car-w.png'/>
+    <img id='car-n' style='display: none' src='./car-n.png'/>
+    <img id='car-s' style='display: none' src='./car-s.png'/>
+
+    <script src='./main.js'></script>
+  </body>
+</html>
